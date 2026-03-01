@@ -1,5 +1,7 @@
 # VOO-Replica-2018-2025
 
+<img width="4169" height="2384" alt="Replica_VOO_Audit" src="https://github.com/user-attachments/assets/d71b3369-c805-48a4-a4aa-abee44e6ccee" />
+
 ## Overview
 This repository contains a quantitative Python model designed to replicate the performance and underlying mechanics of the Vanguard S&P 500 ETF (VOO) over an 8-year time horizon (2018–2025). 
 
@@ -25,6 +27,9 @@ To validate the replica against the actual VOO ETF, the model calculates advance
 ## Key Visualizations
 The model outputs production-grade visualizations to dissect index mechanics:
 * **Efficiency vs. Performance Profile (Bucket Efficiency):** A comprehensive dual-axis chart comparing the total return of 20 distinct 5% market-cap segments against their Omega Ratios. This chart accurately maps the mega-cap concentration by overlaying the exact number of underlying stocks required to fill each segment, contrasting the top-heavy drivers against the long tail of the index.
+
+* 
+<img width="4169" height="2385" alt="Market_Portfolio_Returns" src="https://github.com/user-attachments/assets/4dd4c6f6-ed3f-4a1c-933b-93692cbc376b" />
 
 ## Tech Stack
 * **Language:** Python
