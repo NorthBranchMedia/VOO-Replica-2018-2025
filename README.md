@@ -28,8 +28,8 @@ To validate the replica against the actual VOO ETF, the model calculates advance
 The model outputs production-grade visualizations to dissect index mechanics:
 * **Efficiency vs. Performance Profile (Bucket Efficiency):** A comprehensive dual-axis chart comparing the total return of 20 distinct 5% market-cap segments against their Omega Ratios. This chart accurately maps the mega-cap concentration by overlaying the exact number of underlying stocks required to fill each segment, contrasting the top-heavy drivers against the long tail of the index.
 
-* 
-<img width="4169" height="2385" alt="Market_Portfolio_Returns" src="https://github.com/user-attachments/assets/4dd4c6f6-ed3f-4a1c-933b-93692cbc376b" />
+<img width="4168" height="2384" alt="Market_Portfolio_Daily_Rebalanced_Pegs" src="https://github.com/user-attachments/assets/92836ca6-d18c-4638-b6dc-f7f59a8c989d" />
+
 
 ## Tech Stack
 * **Language:** Python
