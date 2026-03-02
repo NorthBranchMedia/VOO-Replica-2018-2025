@@ -25,10 +25,11 @@ To validate the replica against the actual VOO ETF, the model calculates advance
 * **Omega Ratio:** Measures the probability-weighted ratio of gains versus losses for each market cap bucket, utilizing a highly specific 5% annualized threshold. 
 
 ## Key Visualizations
-The model outputs production-grade visualizations to dissect index mechanics:
-* **Efficiency vs. Performance Profile (Bucket Efficiency):** A comprehensive dual-axis chart comparing the total return of 20 distinct 5% market-cap segments against their Omega Ratios. This chart accurately maps the mega-cap concentration by overlaying the exact number of underlying stocks required to fill each segment, contrasting the top-heavy drivers against the long tail of the index.
 
 <img width="4168" height="2384" alt="Market_Portfolio_Daily_Rebalanced_Pegs" src="https://github.com/user-attachments/assets/92836ca6-d18c-4638-b6dc-f7f59a8c989d" />
+
+
+<img width="4168" height="2370" alt="Bucket_Efficiency" src="https://github.com/user-attachments/assets/0f8b45f0-df59-4449-85f6-9fb11083f9b3" />
 
 
 ## Tech Stack
