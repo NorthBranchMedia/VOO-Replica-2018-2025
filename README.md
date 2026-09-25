@@ -17,12 +17,22 @@ The data pipeline and replication logic were built sequentially in Python:
 1. **Constituent Mapping:** Aggregating historical S&P 500 memberships to establish the exact cross-section of 500 stocks active on every trading day.
 2. **API Data Ingestion:** Automating calls to the EODHD API to pull end-of-day pricing and market cap data for all current and historical tickers.
 3. **Matrix Assembly & Cleansing:** Constructing localized, optimized master matrices (`master_prices_adj.parquet` and `master_mcaps.parquet`). This step handles missing data and forward-fills where appropriate, utilizing custom suppression logic to drop delisted or untradable assets.
-4. **Dynamic Weighting & Replication:** Recreating the passive mechanics of the ETF. The model dynamically recalculates portfolio weights using lagged market caps (`t-1`) to completely prevent look-ahead bias, computing daily portfolio returns as the sum product of component weights and daily percent changes.
+4. **Dynamic Weighting & Replication:** Recreating the passive mechanics of the ETF. The replica engine (Steps 5.1 / 5.2) holds shares and rebalances to market-cap weights at the close on quarterly dates and whenever index membership changes, so additions and deletions trade on their effective date. The analytics (Steps 7.2 / 7.3) weight each day's return by prior-day market caps (`t-1`) to prevent look-ahead bias.
 
 ## Performance Metrics
 To validate the replica against the actual VOO ETF, the model calculates advanced performance metrics:
 * **Tracking Error:** Analyzes the annualized standard deviation of the daily return differences between the Replica and VOO, isolating drag caused by rebalancing lag and constituent mismatches.
 * **Omega Ratio:** Measures the probability-weighted ratio of gains versus losses for each market cap bucket, utilizing a highly specific 5% annualized threshold. 
+
+## Running It
+* **API key:** add your EODHD key in Colab Secrets (key icon in the sidebar) as `EODHD_API_KEY`, or set it as an environment variable. Without a key, the download steps fail but cached parquets in Drive still work.
+* **Order:** run the cells top to bottom. Step 7.1 reuses the `df_prices` name, so re-run Step 5.1 before re-running Step 6.3.
+
+## Known Limitations
+* **Hardcoded drag:** Step 5.1 deducts a fitted 0.6% a year (`HARDCODE_DRAG`) so the replica lands close to VOO. It's a calibration plug for the model's known gaps (survivorship bias, proxy prices, manual share counts), not a modeled cost. Read the alpha figures with that in mind.
+* **Adjusted-close market caps:** caps are built from dividend-adjusted prices, which slightly understate early-period weights for high-yield stocks.
+* **Manual share patches:** Step 3.4 share counts are single constants applied across the whole window, including to tickers that are still listed.
+* **Stored outputs:** the outputs saved in the notebook come from the 01.30.2026 run, before the float, share-alignment and rebalancing fixes. They have not been regenerated.
 
 ## Key Visualizations
 
