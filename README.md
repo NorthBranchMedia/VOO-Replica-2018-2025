@@ -29,10 +29,17 @@ To validate the replica against the actual VOO ETF, the model calculates advance
 * **Order:** run the cells top to bottom. Step 7.1 reuses the `df_prices` name, so re-run Step 5.1 before re-running Step 6.3.
 
 ## Known Limitations
-* **Hardcoded drag:** Step 5.1 deducts a fitted 0.6% a year (`HARDCODE_DRAG`) so the replica lands close to VOO. It's a calibration plug for the model's known gaps (survivorship bias, proxy prices, manual share counts), not a modeled cost. Read the alpha figures with that in mind.
+The model is a close approximation, not an exact replica. Known gaps:
+
+* **Hardcoded drag:** Step 5.1 deducts a fitted 0.6% a year (`HARDCODE_DRAG`) so the replica lands close to VOO. It's a calibration plug that absorbs the gaps below, not a modeled cost, and it compounds to roughly 5% over 8 years. Read the alpha figures with that in mind.
+* **Survivorship bias:** 16 former constituents (e.g. UTX, BHGE, TMK, LLL) are missing for 20+ trading days because EODHD no longer carries their data (Step 4.2). The replica doesn't hold them on those days.
+* **Proxy prices:** a few acquired companies are priced with the acquirer's history (CA uses AVGO, SCG uses D), so their returns are wrong while they were in the index.
+* **Estimated share counts:** the Step 3.4 patches are approximations (sourced from Gemini), each applied as one constant across 2017–2025, overriding EODHD even for tickers still listed. PCG, for example, stays at 520M shares after emerging from bankruptcy with ~2B.
 * **Adjusted-close market caps:** caps are built from dividend-adjusted prices, which slightly understate early-period weights for high-yield stocks.
-* **Manual share patches:** Step 3.4 share counts are single constants applied across the whole window, including to tickers that are still listed.
-* **Stored outputs:** the outputs saved in the notebook come from the 01.30.2026 run, before the float, share-alignment and rebalancing fixes. They have not been regenerated.
+* **Point-in-time data:** share counts are dated at the balance sheet period end rather than the filing date (a small look-ahead), and float factors are hand estimates rather than S&P's published float adjustments.
+* **S&P 100 approximation:** Step 5.2 holds the top 100 S&P 500 names by market cap; the real S&P 100 is committee selected.
+* **Unvalidated fixes:** the float, share-alignment and rebalancing fixes were tested end to end on synthetic data only, not re-run on real data.
+* **Stored outputs:** the outputs saved in the notebook come from the 01.30.2026 run, before those fixes. They have not been regenerated.
 
 ## Key Visualizations
 
